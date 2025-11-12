@@ -48,7 +48,7 @@ An interactive web-based leaderboard for tracking and visualizing AI chess tourn
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/ai-chess-tournament-board.git
+   git clone https://github.com/om1311-agrawal/ai-chess-tournament-board.git
    cd ai-chess-tournament-board
    ```
 
