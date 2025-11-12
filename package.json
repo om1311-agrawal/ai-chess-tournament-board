@@ -1,0 +1,23 @@
+{
+  "name": "ai-chess-tournament-board",
+  "version": "1.0.0",
+  "description": "Interactive web-based leaderboard for tracking AI chess tournament results with detailed model configurations and statistics",
+  "main": "process_data.js",
+  "scripts": {
+    "start": "http-server -p 8080 -o leaderboard.html",
+    "build": "node process_data.js"
+  },
+  "keywords": [
+    "chess",
+    "tournament",
+    "leaderboard",
+    "ai",
+    "llm",
+    "prompt-engineering"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "yaml": "^2.8.1"
+  }
+}

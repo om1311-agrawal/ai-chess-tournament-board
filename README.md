@@ -1,61 +1,186 @@
-# Prompt Game Tournament Results - Web Display Exercise
+# 🏆 AI Chess Tournament Leaderboard
 
-## Exercise Description
+An interactive web-based leaderboard for tracking and visualizing AI chess tournament results. This tool displays player rankings, statistics, and the AI model configurations (prompts and parameters) used by each participant.
 
-This repository contains tournament results data from a prompt-based game competition. Your task is to create a website that displays these results in an engaging and informative way.
+![Chess Tournament](https://img.shields.io/badge/Tournament-Chess-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-## Data Structure
+## 🌟 Features
 
-The `data/` folder contains:
-- **`final_standings.csv`**: Tournament standings with player rankings, ratings, and game statistics
-  - Columns: `Rank`, `Player`, `Rating_Mu`, `Rating_Sigma`, `Wins`, `Draws`, `Losses`, `Games`, `Win_Rate`
-- **`prompt_collection/`**: Individual player configuration files (YAML format)
+### 📊 Dynamic Sorting
+- Sort players by **Rank**, **Win Rate**, or **Rating (μ)**
+- Toggle between ascending and descending order
+- Active sort indicator
 
-## Your Task
+### 📌 Pin Functionality
+- Pin favorite players to the top of the leaderboard
+- Pinned players remain visible regardless of sort order
+- Visual indicator for pinned entries
 
-Create a website that displays the tournament results with the following requirements:
+### 🎨 Smart Highlighting
+- **Top 3 Players**: Highlight the top three performers (gold accent)
+- **High Win Rate**: Highlight players with >80% win rate (green accent)
+- Toggle between highlighting modes via dropdown
 
-### Minimum Requirements
-1. **Display the leaderboard** - Show all players ranked by their final standings
-2. **Visualize statistics** - Include charts or graphs showing:
-   - Win rates
-   - Rating distributions
-   - Game statistics (wins, draws, losses)
-3. **Player details** - Allow users to view individual player statistics
-4. **Responsive design** - The website should work on desktop and mobile devices
+### 🤖 AI Model Details
+- Click any player to view their complete configuration:
+  - Model provider (OpenAI, Gemini, etc.)
+  - Model name and version
+  - Temperature and other parameters
+  - System prompts
+  - Step-wise gameplay prompts
 
-### Suggested Features (Optional)
-- Interactive filtering and sorting
-- Search functionality for players
-- Comparison view between players
-- Export functionality
-- Dark/light theme toggle
+### 💎 UI/UX
+- Modern, responsive design
+- Smooth animations and transitions
+- Visual win rate progress bars
+- Medal badges for top 3 ranks (🥇🥈🥉)
+- Dark-themed prompt display
+- Sticky table headers
 
-## Getting Started
+## 🚀 Quick Start
 
-1. Clone this repository
-2. Explore the data files to understand the structure
-3. Choose your tech stack (e.g., HTML/CSS/JavaScript, React, Vue, Python Flask/Django, etc.)
-4. Build your website to display the results
-5. Test your implementation
-6. Submit your solution
+### Prerequisites
+- Node.js (v12 or higher)
+- npm
 
-## Data Preview
+### Installation
 
-The tournament includes multiple players with their game statistics. Each player has:
-- A ranking position
-- Rating metrics (Mu and Sigma)
-- Win/Draw/Loss record
-- Total games played
-- Win rate percentage
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/ai-chess-tournament-board.git
+   cd ai-chess-tournament-board
+   ```
 
-## Submission
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Include:
-- Your source code
-- A brief README explaining your approach
-- Screenshots or a demo link (if hosted)
+3. **Process the tournament data**
+   ```bash
+   node process_data.js
+   ```
+   This will generate `leaderboard_data.json` from the CSV standings and YAML configuration files.
 
-## License
-MIT License
+4. **Start the server**
+   ```bash
+   npm start
+   ```
+   The leaderboard will open automatically at `http://localhost:8080/leaderboard.html`
+
+## 📁 Project Structure
+
+```
+ai-chess-tournament-board/
+├── data/
+│   ├── final_standings.csv          # Player rankings and statistics
+│   └── prompt_collection/           # YAML files with AI configurations
+│       ├── player1_config.yml
+│       ├── player2_config.yml
+│       └── ...
+├── leaderboard.html                 # Main interactive interface
+├── process_data.js                  # Data processing script
+├── leaderboard_data.json           # Generated combined data
+├── package.json                     # Node dependencies
+└── README.md
+```
+
+## 📊 Data Format
+
+### CSV Structure (final_standings.csv)
+```csv
+Rank,Player,Rating_Mu,Rating_Sigma,Wins,Draws,Losses,Games,Win_Rate
+1,player1,43.86,3.48,12,0,0,12,1.000
+```
+
+### YAML Structure (player_config.yml)
+```yaml
+agent0:
+  model:
+    provider: "OpenAI"
+    name: "gpt-4"
+    params:
+      temperature: 1.0
+  prompts:
+    system_prompt: |
+      Your system prompt here...
+    step_wise_prompt: |
+      Your gameplay prompt here...
+```
+
+## 🎮 Usage
+
+### Viewing the Leaderboard
+1. Open `http://localhost:8080/leaderboard.html` in your browser
+2. Browse the ranked list of players and their statistics
+
+### Sorting
+- Click **Rank**, **Win Rate**, or **Rating (μ)** buttons to sort
+- Click again to reverse the sort order
+
+### Pinning Players
+- Click the pin icon (📍) next to any player to pin them
+- Pinned players appear at the top with a gold background
+- Click again to unpin
+
+### Highlighting
+- Use the **Highlight** dropdown to select:
+  - **None**: Standard view
+  - **Top 3 Players**: Highlights ranks 1-3
+  - **Win Rate > 0.8**: Highlights high performers
+
+### Viewing AI Details
+- Click any player row to open their detail modal
+- View complete statistics, model configuration, and prompts
+- Close with X button, click outside, or press ESC
+
+## 🔧 Customization
+
+### Adding New Tournament Data
+1. Replace `data/final_standings.csv` with your tournament results
+2. Add player YAML configuration files to `data/prompt_collection/`
+3. Run `node process_data.js` to regenerate the data
+4. Refresh the leaderboard
+
+### Modifying Highlight Thresholds
+Edit line 440 in `leaderboard.html`:
+```javascript
+} else if (highlightMode === 'winrate' && player.win_rate > 0.8) {
+    // Change 0.8 to your desired threshold
+```
+
+### Styling
+All styles are embedded in `leaderboard.html`. Modify the `<style>` section to customize colors, fonts, and layout.
+
+## 📦 Dependencies
+
+- **yaml**: YAML parsing for configuration files
+- **http-server**: Local development server
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to:
+- Report bugs
+- Suggest new features
+- Submit pull requests
+
+## 📄 License
+
+This project is licensed under the MIT License - feel free to use it for your own tournaments!
+
+## 🎯 Use Cases
+
+- **AI/LLM Chess Tournaments**: Track games between different AI models
+- **Classroom Competitions**: Display student rankings and strategies
+- **Research Projects**: Compare different prompt engineering approaches
+- **Tournament Hosting**: Professional leaderboard for any competition format
+
+## 🙏 Acknowledgments
+
+Built for tracking AI chess tournament results with detailed model configuration analysis.
+
+---
+
+**Made with ❤️ for AI competitions**
 
